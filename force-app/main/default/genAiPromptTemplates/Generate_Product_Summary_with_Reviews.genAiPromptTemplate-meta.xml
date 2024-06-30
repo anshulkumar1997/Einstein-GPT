@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPromptTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <activeVersion>1</activeVersion>
+    <developerName>Generate_Product_Summary_with_Reviews</developerName>
+    <masterLabel>Generate Product Summary with Reviews</masterLabel>
+    <relatedEntity>Product__c</relatedEntity>
+    <relatedField>Product__c.Product_Summary__c</relatedField>
+    <templateVersions>
+        <content>You are a data scientist. Summarize the Record with customers Feed and Specifics have provided for the specified product.
+
+Instructions:
+
+&apos;&apos;&apos;
+Use clear, concise, and straightforward language using the active voice and strictly avoiding the use of filler words and phrases and redundant language. 
+
+The Product for which you’ll generate the summary is {!$Input:Product__c.Name}
+
+Take every record field into account mainly {!$Input:Product__c.Battery__c}, {!$Input:Product__c.Motor__c}, {!$Input:Product__c.Material__c}, {!$Input:Product__c.Charger__c}, {!$Input:Product__c.Category__c}, {!$Input:Product__c.Product_Family__r.Name} and {!$Input:Product__c.MSRP__c}.
+
+Only Pick Positive Sentiment reviews taking into account the following reviews: 
+{!$RelatedList:Product__c.Customer_Reviews__r.Records}
+
+Don&apos;t show the Consumer that we are only showing the Positive Reviews and Don&apos;t Show Customer Name, express them as one or another.
+
+Show Specifications First and then go for Reviews
+
+&apos;&apos;&apos;
+Now generate the summary.
+</content>
+        <inputs>
+            <apiName>RelatedEntity</apiName>
+            <definition>SOBJECT://Product__c</definition>
+            <referenceName>Input:Product__c</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4</primaryModel>
+        <status>Published</status>
+        <templateDataProviders>
+            <definition>invocable://getRelatedList</definition>
+            <parameters>
+                <definition>primitive://String</definition>
+                <isRequired>true</isRequired>
+                <parameterName>parentRecordId</parameterName>
+                <valueExpression>{!$Input:Product__c.Id}</valueExpression>
+            </parameters>
+            <parameters>
+                <definition>primitive://String</definition>
+                <isRequired>true</isRequired>
+                <parameterName>relatedListName</parameterName>
+                <valueExpression>Customer_Reviews__r</valueExpression>
+            </parameters>
+            <referenceName>RelatedList:Product__c.Customer_Reviews__r.Records</referenceName>
+        </templateDataProviders>
+        <versionNumber>1</versionNumber>
+    </templateVersions>
+    <type>einstein_gpt__fieldCompletion</type>
+    <visibility>Global</visibility>
+</GenAiPromptTemplate>

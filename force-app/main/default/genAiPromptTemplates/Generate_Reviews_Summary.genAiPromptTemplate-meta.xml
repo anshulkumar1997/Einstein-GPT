@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPromptTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <activeVersion>1</activeVersion>
+    <description>This template is used to summarize reviews of a product</description>
+    <developerName>Generate_Reviews_Summary</developerName>
+    <masterLabel>Generate Reviews Summary</masterLabel>
+    <relatedEntity>Product__c</relatedEntity>
+    <relatedField>Product__c.Reviews_Summary__c</relatedField>
+    <templateVersions>
+        <content>You are a data scientist. Summarize the feedback customers have provided for the specified product.
+
+Instructions:
+
+&apos;&apos;&apos;
+Use clear, concise, and straightforward language using the active voice and strictly avoiding the use of filler words and phrases and redundant language. 
+
+The Product for which you’ll generate the summary is {!$Input:Product__c.Name}. 
+
+Elaborate on the summary taking into account the following reviews: 
+{!$RelatedList:Product__c.Customer_Reviews__r.Records}
+
+Include the average rating the product received based on the Rating__c field from the reviews above. 
+
+Identify the overall sentiment of all the reviews as positive, negative or neutral.
+
+&apos;&apos;&apos;
+
+Do not create a list of reviews. Provide two or three examples of reviews in the summary. 
+
+Now generate the summary.
+</content>
+        <inputs>
+            <apiName>RelatedEntity</apiName>
+            <definition>SOBJECT://Product__c</definition>
+            <referenceName>Input:Product__c</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4Turbo</primaryModel>
+        <status>Published</status>
+        <templateDataProviders>
+            <definition>invocable://getRelatedList</definition>
+            <parameters>
+                <definition>primitive://String</definition>
+                <isRequired>true</isRequired>
+                <parameterName>parentRecordId</parameterName>
+                <valueExpression>{!$Input:Product__c.Id}</valueExpression>
+            </parameters>
+            <parameters>
+                <definition>primitive://String</definition>
+                <isRequired>true</isRequired>
+                <parameterName>relatedListName</parameterName>
+                <valueExpression>Customer_Reviews__r</valueExpression>
+            </parameters>
+            <referenceName>RelatedList:Product__c.Customer_Reviews__r.Records</referenceName>
+        </templateDataProviders>
+        <versionNumber>1</versionNumber>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a data scientist. Summarize the feedback customers have provided for the specified product.
+
+Instructions:
+
+&apos;&apos;&apos;
+Use clear, concise, and straightforward language using the active voice and strictly avoiding the use of filler words and phrases and redundant language. 
+
+The Product for which you’ll generate the summary is {!$Input:Product__c.Name}. 
+
+Elaborate on the summary taking into account the following reviews: 
+{!$RelatedList:Product__c.Customer_Reviews__r.Records}
+
+Include the average rating the product received based on the Rating__c field from the reviews above. 
+
+Identify the overall sentiment of all the reviews as positive, negative or neutral.
+
+&apos;&apos;&apos;
+
+Do not create a list of reviews. Provide two or three examples of reviews in the summary. 
+
+Now generate the summary.
+</content>
+        <inputs>
+            <apiName>RelatedEntity</apiName>
+            <definition>SOBJECT://Product__c</definition>
+            <referenceName>Input:Product__c</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4Turbo</primaryModel>
+        <status>Draft</status>
+        <templateDataProviders>
+            <definition>invocable://getRelatedList</definition>
+            <parameters>
+                <definition>primitive://String</definition>
+                <isRequired>true</isRequired>
+                <parameterName>parentRecordId</parameterName>
+                <valueExpression>{!$Input:Product__c.Id}</valueExpression>
+            </parameters>
+            <parameters>
+                <definition>primitive://String</definition>
+                <isRequired>true</isRequired>
+                <parameterName>relatedListName</parameterName>
+                <valueExpression>Customer_Reviews__r</valueExpression>
+            </parameters>
+            <referenceName>RelatedList:Product__c.Customer_Reviews__r.Records</referenceName>
+        </templateDataProviders>
+        <versionNumber>2</versionNumber>
+    </templateVersions>
+    <type>einstein_gpt__fieldCompletion</type>
+    <visibility>Global</visibility>
+</GenAiPromptTemplate>
