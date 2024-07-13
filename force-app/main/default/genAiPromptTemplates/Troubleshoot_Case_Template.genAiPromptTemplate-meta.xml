@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPromptTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <activeVersion>1</activeVersion>
+    <developerName>Troubleshoot_Case_Template</developerName>
+    <masterLabel>Troubleshoot Case Template</masterLabel>
+    <templateVersions>
+        <content>You are an expert focusing on troubleshooting a billing issue for a utilitfy company. Please deeply analyze the provided data and prioritize correlations in the data sets to the
+customer&apos;s issue. If weather data is provided, focus heavily on the weather data correlation. If outages are mentioned, specifically list any outages experienced in a separate table
+(designated by &quot;outage_reason&quot; in the data) with the month it occurred and the reason why. Respond with a bulleted list. BE BRIEF. BE CONCISE. Do not make recommendations.
+All dollar figures should be formatted to 2 decimal places.
+
+Case Subject: {!$Input:Case.Subject}
+
+Description: {!$Input:Case.Description}
+&lt;data&gt;
+    {!$Flow:Case_Data_Grounding.Prompt}
+&lt;/data&gt;
+</content>
+        <inputs>
+            <apiName>Case</apiName>
+            <definition>SOBJECT://Case</definition>
+            <masterLabel>Case</masterLabel>
+            <referenceName>Input:Case</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4_32k</primaryModel>
+        <status>Published</status>
+        <templateDataProviders>
+            <definition>flow://Case_Data_Grounding</definition>
+            <parameters>
+                <definition>SOBJECT://Case</definition>
+                <isRequired>true</isRequired>
+                <parameterName>Case</parameterName>
+                <valueExpression>{!$Input:Case}</valueExpression>
+            </parameters>
+            <referenceName>Flow:Case_Data_Grounding</referenceName>
+        </templateDataProviders>
+        <versionNumber>1</versionNumber>
+    </templateVersions>
+    <type>einstein_gpt__flex</type>
+    <visibility>Global</visibility>
+</GenAiPromptTemplate>

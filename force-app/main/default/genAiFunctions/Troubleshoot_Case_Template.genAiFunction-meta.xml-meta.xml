@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiFunction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Troubleshoots a single Salesforce CRM Case record. Requires a single Case record ID as input for Troubleshoot_Case_Template. You MUST return promptResponse to the user. Do
+not use this to summarize a record. This should ONLY be used when a user specifically asks for troubleshooting a case.</description>
+    <invocationTarget>Troubleshoot_Case_Template</invocationTarget>
+    <invocationTargetType>generatePromptResponse</invocationTargetType>
+    <isConfirmationRequired>false</isConfirmationRequired>
+    <masterLabel>Troubleshoot Case Template</masterLabel>
+</GenAiFunction>

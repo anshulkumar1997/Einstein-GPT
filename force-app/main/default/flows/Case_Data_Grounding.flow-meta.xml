@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Get_Weather_Data</name>
+        <label>Get Weather Data</label>
+        <locationX>176</locationX>
+        <locationY>134</locationY>
+        <actionName>WeatherData.Weather Data</actionName>
+        <actionType>externalService</actionType>
+        <connector>
+            <targetReference>Get_Weather_Data_Prompt</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <nameSegment>WeatherData.Weather Data</nameSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+        <versionSegment>1</versionSegment>
+    </actionCalls>
+    <apiVersion>61.0</apiVersion>
+    <assignments>
+        <name>Get_Weather_Data_Prompt</name>
+        <elementSubtype>AddPromptInstructions</elementSubtype>
+        <label>Get Weather Data Prompt</label>
+        <locationX>176</locationX>
+        <locationY>242</locationY>
+        <assignmentItems>
+            <assignToReference>$Output.Prompt</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <stringValue>&lt;WeatherData&gt;
+{!Get_Weather_Data.2XX}
+&lt;/WeatherData&gt;
+</stringValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <environments>Default</environments>
+    <interviewLabel>Case Data Grounding {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Case Data Grounding</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>PromptFlow</processType>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <capabilityTypes>
+            <name>FlexTemplate://Troubleshoot_Case_Template</name>
+            <capabilityName>FlexTemplate://Troubleshoot_Case_Template</capabilityName>
+            <inputs>
+                <name>Case</name>
+                <capabilityInputName>Case</capabilityInputName>
+                <dataType>SOBJECT://Case</dataType>
+                <isCollection>false</isCollection>
+            </inputs>
+        </capabilityTypes>
+        <connector>
+            <targetReference>Get_Weather_Data</targetReference>
+        </connector>
+        <triggerType>Capability</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>
