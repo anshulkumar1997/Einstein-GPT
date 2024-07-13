@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPromptTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <developerName>Opportunity</developerName>
+    <masterLabel>Opportunity</masterLabel>
+    <relatedEntity>Account</relatedEntity>
+    <relatedField>Account.Description</relatedField>
+    <templateVersions>
+        <content>You are a Salesforce Developer with 3.5 years of experience worked on 4 Projects. Now you are Searching for a Job in Germany, you are also Searching for a Opportunity Card. Write down a Letter of Motivation to move to Germany and why only Germany in the EU. You have a German A2 Certification as well
+</content>
+        <inputs>
+            <apiName>RelatedEntity</apiName>
+            <definition>SOBJECT://Account</definition>
+            <referenceName>Input:Account</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4Turbo</primaryModel>
+        <status>Draft</status>
+        <versionNumber>1</versionNumber>
+    </templateVersions>
+    <type>einstein_gpt__fieldCompletion</type>
+    <visibility>Global</visibility>
+</GenAiPromptTemplate>
