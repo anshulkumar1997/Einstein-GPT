@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPromptTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <activeVersion>1</activeVersion>
+    <description>A short summary of case details</description>
+    <developerName>Quick_Summary</developerName>
+    <masterLabel>Quick Summary</masterLabel>
+    <relatedEntity>Case</relatedEntity>
+    <relatedField>Case.Quick_Summary__c</relatedField>
+    <templateVersions>
+        <content>Summarize the concatenation of the contents of the comment bodies of {!$RelatedList:Case.CaseComments.Records} along with the text from {!$Input:Case.Subject}, the case priority which is {!$Input:Case.Priority}, and the case type which is {!$Input:Case.Type}.
+Keep the response to a single short paragraph.
+</content>
+        <inputs>
+            <apiName>RelatedEntity</apiName>
+            <definition>SOBJECT://Case</definition>
+            <referenceName>Input:Case</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4</primaryModel>
+        <status>Published</status>
+        <templateDataProviders>
+            <definition>invocable://getRelatedList</definition>
+            <parameters>
+                <definition>primitive://String</definition>
+                <isRequired>true</isRequired>
+                <parameterName>parentRecordId</parameterName>
+                <valueExpression>{!$Input:Case.Id}</valueExpression>
+            </parameters>
+            <parameters>
+                <definition>primitive://String</definition>
+                <isRequired>true</isRequired>
+                <parameterName>relatedListName</parameterName>
+                <valueExpression>CaseComments</valueExpression>
+            </parameters>
+            <referenceName>RelatedList:Case.CaseComments.Records</referenceName>
+        </templateDataProviders>
+        <versionNumber>1</versionNumber>
+    </templateVersions>
+    <type>einstein_gpt__fieldCompletion</type>
+    <visibility>Global</visibility>
+</GenAiPromptTemplate>
