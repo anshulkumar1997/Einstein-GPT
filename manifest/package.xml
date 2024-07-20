@@ -37,8 +37,12 @@
         <name>GenAiPromptTemplate</name>
     </types>
     \<types>
-        <members>Troubleshoot_Case_Template</members>
+        <members>*</members>
         <name>GenAiFunction</name>
+    </types>
+    <types>
+        <member>*</members>
+        <name>Flow</name>
     </types>
     <version>61.0</version>
 </Package>
