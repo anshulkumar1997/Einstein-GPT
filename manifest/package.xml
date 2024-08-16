@@ -36,13 +36,31 @@
         <members>*</members>
         <name>GenAiPromptTemplate</name>
     </types>
-    \<types>
+    <types>
         <members>*</members>
         <name>GenAiFunction</name>
     </types>
     <types>
-        <member>*</members>
+        <members>Add_Experiences_to_Prompt</members>
+        <members>Create_Reservation_Follow_up</members>
+        <members>Issue_Bulk_Resort_Credits</members>
+        <members>Issue_Resort_Credit</members>
+        <members>PersonalizedSchedule</members>
+        <members>Get_Customer_Reward_Points</members>
         <name>Flow</name>
+    </types>
+    <types>
+        <members>PersonalizedGuestExperiences</members>
+        <members>ExperienceSessionController</members>
+        <members>WeatherService</members>
+        <members>GetCheckinDate</members>
+        <members>CheckWeather</members>
+        <name>ApexClass</name>
+    </types>
+    <types>
+        <members>RewardAPI</members>
+        <members>Weather_Endpoint</members>
+        <name>NamedCredential</name>
     </types>
     <version>61.0</version>
 </Package>
